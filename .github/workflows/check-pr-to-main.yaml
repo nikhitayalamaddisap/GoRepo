@@ -26,6 +26,8 @@ jobs:
         with:
           files: files/**
       - name: Print Changed Files
+        env:
+          ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_modified_files }}
         run: |
           echo "Changed files:"
-          cat $GITHUB_EVENT_PATH
+          cat $ALL_CHANGED_FILES
