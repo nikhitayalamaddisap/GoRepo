@@ -12,17 +12,20 @@ on:
 
 jobs:
   pullrequest_to_main:
-    runs-on: linux-runners
+    runs-on: ubuntu-latest
 
     steps:
       # get changed files from PR
       - name: Checkout PR head ref
         uses: actions/checkout@v4
         with:
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
           ref: ${{ github.event.pull_request.head.sha }}
       - name: Get changed files
         id: changed-files
         uses: actions/changed-files@v42
         with:
           files: files/**
+      - name: Print Changed Files
+        run: |
+          echo "Changed files:"
+          cat $GITHUB_EVENT_PATH
